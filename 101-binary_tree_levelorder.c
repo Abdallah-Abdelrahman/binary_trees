@@ -1,5 +1,4 @@
 #include "binary_trees.h"
-void print_level(const binary_tree_t *tree, void (func)(int), size_t level);
 
 /**
  * binary_tree_levelorder - goes through a binary tree.
@@ -60,5 +59,5 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	if (tree->right)
 		right = binary_tree_height(tree->right) + 1;
 
-	return ((right > left) ? right : left);
+	return (MAX(left, right));
 }
