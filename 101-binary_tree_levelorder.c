@@ -2,7 +2,8 @@
 
 /**
  * binary_tree_levelorder - goes through a binary tree.
- * Description: using level-order traversal (Breadth-first-search)
+ * Description: using level-order traversal (Breadth-first-search),
+ * time coplexity is O(n).
  * @tree: pointer to the root node of the tree to traverse
  * @func: pointer to a function to call for each node
  *
@@ -10,54 +11,56 @@
  */
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
-	size_t h, i = 0;
+	size_t i = 0, size = QUEUE_SIZE;
+	queue_t q = {0, 0, NULL};
+	const binary_tree_t *tmp;
 
 	if (tree && func)
 	{
-		h = binary_tree_height(tree);
-		for (i = 0; i <= h; i++)
-			print_level(tree, func, i);
+		q.queue = calloc(sizeof(binary_tree_t), size);
+		tmp = tree;
+		while (tmp)
+		{
+			if (i == size - 1)
+			{
+				size *= 2;
+				q.queue = realloc(q.queue, size * sizeof(binary_tree_t));
+			}
+			func(tmp->n);
+			if (tmp->left)
+				enqueue(&q, tmp->left);
+			if (tmp->right)
+				enqueue(&q, tmp->right);
+			tmp = dequeue(&q);
+
+			/* book keeping for the queue */
+			i++;
+		}
+		free(q.queue);
 	}
 }
 
 /**
- * print_level - print all nodes in current level
- * @tree: pointer to root node
- * @func: pointer to a function to call for each node
- * @level: current level of the tree
+ * enqueue - add element to the back of the queue
+ * @q: struct of Queue_s (refer to binary_trees.h)
+ * @tree: pointer to a node in binary tree
  *
  * Return: Nothing
- *
  */
-void print_level(const binary_tree_t *tree, void (func)(int), size_t level)
+void enqueue(queue_t *q, binary_tree_t *tree)
 {
-	if (level == 0)
-	{
-		func(tree->n);
-		return;
-	}
-
-	print_level(tree->left, func, level - 1);
-	print_level(tree->right, func, level - 1);
+	q->queue[q->rear++] = tree;
 }
 
 /**
- * binary_tree_height - measures the height of a binary tree
- * @tree: pointer to the root node of the tree
+ * dequeue - pop an element from the front of the queue
+ * Description: we don't remove the element cuz removing
+ * requires shifting which's O(n).
+ * @q: struct of Queue_s (refer to binary_trees.h)
  *
- * Return: height of the tree, 0 if NULL
+ * Return: the poped element
  */
-size_t binary_tree_height(const binary_tree_t *tree)
+binary_tree_t *dequeue(queue_t *q)
 {
-	size_t left = 0, right = 0;
-
-	if (!tree)
-		return (0);
-
-	if (tree->left)
-		left = binary_tree_height(tree->left) + 1;
-	if (tree->right)
-		right = binary_tree_height(tree->right) + 1;
-
-	return (MAX(left, right));
+	return (q->queue[q->front++]);
 }
