@@ -94,10 +94,5 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tr
 /*----------- HELPERS ------------*/
 void binary_tree_print(const binary_tree_t *tree);
 size_t _pow(int base, int exp);
-void print_level(const binary_tree_t *tree, void (func)(int), size_t level);
-void enqueue(queue_t *queue, binary_tree_t *tree);
-binary_tree_t *dequeue(queue_t *queue);
-void enqueue(queue_t *q, binary_tree_t *tree);
-binary_tree_t *dequeue(queue_t *q);
 
 #endif /* HEADER */

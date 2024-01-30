@@ -26,12 +26,14 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 				size *= 2;
 				q.queue = realloc(q.queue, size * sizeof(binary_tree_t));
 			}
+
 			func(tmp->n);
 			if (tmp->left)
-				enqueue(&q, tmp->left);
+				q.queue[q.rear++] = tmp->left;
 			if (tmp->right)
-				enqueue(&q, tmp->right);
-			tmp = dequeue(&q);
+				q.queue[q.rear++] = tmp->right;
+
+			tmp = q.queue[q.front++];
 
 			/* book keeping for the queue */
 			i++;
