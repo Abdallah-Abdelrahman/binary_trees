@@ -7,12 +7,14 @@
 
 /*----------- MACROS ------------*/
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
+#define QUEUE_SIZE 100
 
 /*----------- ALIASES ------------*/
 typedef struct binary_tree_s binary_tree_t;
 typedef struct binary_tree_s bst_t;
 typedef struct binary_tree_s avl_t;
 typedef struct binary_tree_s heap_t;
+typedef struct Queue_s queue_t;
 
 /*----------- STRUCTS ------------*/
 /**
@@ -29,6 +31,19 @@ struct binary_tree_s
 	struct binary_tree_s *parent;
 	struct binary_tree_s *left;
 	struct binary_tree_s *right;
+};
+
+/**
+ * struct Queue_s - Queue data structure
+ *
+ * @front: front of the queue
+ * @rear: back of the queue
+ * @queue: arrey of struct binary_tree_s
+ */
+struct Queue_s
+{
+	int front, rear;
+	binary_tree_t **queue;
 };
 
 /*----------- PROTOTYPES ------------*/
@@ -78,6 +93,5 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tr
 /*----------- HELPERS ------------*/
 void binary_tree_print(const binary_tree_t *tree);
 size_t _pow(int base, int exp);
-void print_level(const binary_tree_t *tree, void (func)(int), size_t level);
 
 #endif /* HEADER */
