@@ -41,28 +41,3 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 		free(q.queue);
 	}
 }
-
-/**
- * enqueue - add element to the back of the queue
- * @q: struct of Queue_s (refer to binary_trees.h)
- * @tree: pointer to a node in binary tree
- *
- * Return: Nothing
- */
-void enqueue(queue_t *q, binary_tree_t *tree)
-{
-	q->queue[q->rear++] = tree;
-}
-
-/**
- * dequeue - pop an element from the front of the queue
- * Description: we don't remove the element cuz removing
- * requires shifting which's O(n).
- * @q: struct of Queue_s (refer to binary_trees.h)
- *
- * Return: the poped element
- */
-binary_tree_t *dequeue(queue_t *q)
-{
-	return (q->queue[q->front++]);
-}
