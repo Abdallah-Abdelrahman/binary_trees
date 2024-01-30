@@ -73,6 +73,9 @@ heap_t *array_to_heap(int *array, size_t size);
 int heap_extract(heap_t **root);
 int *heap_to_sorted_array(heap_t *heap, size_t *size);
 
+/*----------ADVANCED----------*/
+binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second);
+
 /*----------- HELPERS ------------*/
 void binary_tree_print(const binary_tree_t *tree);
 size_t _pow(int base, int exp);
