@@ -6,6 +6,7 @@
 #include <stdio.h>
 
 /*----------- MACROS ------------*/
+#define MAX(x, y) (x) > (y) ? (x) : (y)
 
 /*----------- ALIASES ------------*/
 typedef struct binary_tree_s binary_tree_t;
