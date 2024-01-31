@@ -4,6 +4,7 @@
 /*----------- HEADERS ------------*/
 #include <stdlib.h>
 #include <stdio.h>
+#include <limits.h>
 
 /*----------- MACROS ------------*/
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
