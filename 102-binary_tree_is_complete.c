@@ -12,7 +12,7 @@ int isCompleted(const binary_tree_t *root, unsigned long cal,
 {
 	if (!root)
 		return (1);
-	if (ind >= cal)
+	if (ind > cal)
 		return (0);
 	return (isCompleted(root->left, 2 * ind + 1, cal)
 			&& isCompleted(root->right, 2 * ind + 2, cal));
