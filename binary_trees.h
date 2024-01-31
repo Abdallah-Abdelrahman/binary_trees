@@ -8,7 +8,7 @@
 
 /*----------- MACROS ------------*/
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
-#define QUEUE_SIZE 100
+#define QUEUE_SIZE 500
 
 /*----------- ALIASES ------------*/
 typedef struct binary_tree_s binary_tree_t;

@@ -1,4 +1,5 @@
 #include "binary_trees.h"
+#include <stdio.h>
 
 /**
  * binary_tree_is_complete - checks if a binary tree is complete
@@ -17,11 +18,9 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 		return (0);
 
 	q.queue = calloc(sizeof(binary_tree_t), QUEUE_SIZE);
-	q.queue[q.rear++] = (binary_tree_t *)tree;
-	while (q.rear != q.front)
+	tmp = tree;
+	while (tmp)
 	{
-		/* dequeue */
-		tmp = q.queue[q.front++];
 		if (tmp->left)
 		{
 			if (is_not_full)
@@ -29,7 +28,6 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 				free(q.queue);
 				return (0);
 			}
-
 			/* enqueue */
 			q.queue[q.rear++] = tmp->left;
 		}
@@ -42,12 +40,12 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 				free(q.queue);
 				return (0);
 			}
-
-			/* enqueue */
 			q.queue[q.rear++] = tmp->right;
 		}
 		else
 			is_not_full = 1;
+		/* dequeue */
+		tmp = q.queue[q.front++];
 	}
 
 	free(q.queue);
