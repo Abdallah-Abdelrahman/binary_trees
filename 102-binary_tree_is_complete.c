@@ -1,11 +1,11 @@
 #include "binary_trees.h"
 /**
  * isCompleted - checks if a tree is completed
- * @root : racine del'arbre binaire
- * @ind : index
- * @cal : taille of the tree
+ * @root: racine del'arbre binaire
+ * @ind: index
+ * @cal: taille of the tree
  *
- * Return : index if completed , 0 otherwise
+ * Return: index if completed , 0 otherwise
 */
 int isCompleted(const binary_tree_t *root, unsigned long cal,
 		unsigned long int ind)
