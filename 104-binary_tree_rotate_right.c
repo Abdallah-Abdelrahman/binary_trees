@@ -10,11 +10,11 @@ binary_tree_t *binary_tree_rotate_right(binary_tree_t *tree)
 {
 	binary_tree_t *root, *pivot;
 
-	if (!tree)
+	if (!tree || (!tree->left && !tree->right))
 		return (tree);
 
 	root = tree;
-	pivot = root->left;
+	pivot = root->left ? root->left : root->right;
 	pivot->parent = root->parent;
 	root->parent = pivot;
 	root->left = pivot->right;
