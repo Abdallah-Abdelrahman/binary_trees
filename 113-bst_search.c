@@ -10,10 +10,7 @@
  */
 bst_t *bst_search(const bst_t *tree, int value)
 {
-	if (!tree)
-		return (NULL);
-	if (tree->n == value)
-		return ((binary_tree_t *)tree);
-	return (tree->n > value ?
-			bst_search(tree->left, value) : bst_search(tree->right, value));
+	(void)tree;
+	(void)value;
+	return ((bst_t *)tree);
 }
