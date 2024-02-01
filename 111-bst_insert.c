@@ -49,7 +49,7 @@ bst_t *_bst_insert(bst_t *tree, int value)
  *
  * Return: pointer to the created node, or NULL on failure or if parent is NULL
  */
-binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
+binary_tree_t *binary_tree_insert_right(bst_t *parent, int value)
 {
 	binary_tree_t *new_node;
 
@@ -81,7 +81,7 @@ binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
  * Return:  pointer to the created node,
  * or NULL on failure or if parent is NULL
  */
-binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
+binary_tree_t *binary_tree_insert_left(bst_t *parent, int value)
 {
 	binary_tree_t *new_node;
 
