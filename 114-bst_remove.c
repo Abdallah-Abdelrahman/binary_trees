@@ -68,7 +68,7 @@ bst_t *inorder_successor(binary_tree_t *node)
 	bst_t *p;
 
 	if (node->right)
-		return (min(node->right));
+		return (min_node(node->right));
 
 	p = node->parent;
 	while (p && node == p->right)
@@ -85,10 +85,10 @@ bst_t *inorder_successor(binary_tree_t *node)
  *
  * Return: node comprises minimum value
  */
-bst_t *min(bst_t *tree)
+bst_t *min_node(bst_t *tree)
 {
 	if (tree && tree->left)
-		return (min(tree->left));
+		return (min_node(tree->left));
 	return (tree);
 }
 
