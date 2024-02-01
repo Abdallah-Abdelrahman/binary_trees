@@ -94,5 +94,8 @@ void binary_tree_print(const binary_tree_t *tree);
 size_t _pow(int base, int exp);
 int is_bst(const binary_tree_t *tree, int min, int max);
 bst_t *_bst_insert(bst_t *tree, int value);
+bst_t *get_root(bst_t *node);
+bst_t *inorder_successor(binary_tree_t *node);
+bst_t *min(bst_t *tree);
 
 #endif /* HEADER */
