@@ -99,5 +99,6 @@ bst_t *_bst_insert(bst_t *tree, int value);
 bst_t *get_root(bst_t *node);
 bst_t *inorder_successor(binary_tree_t *node);
 bst_t *min_node(bst_t *tree);
+bst_t *_bst_search(const bst_t *tree, int value);
 
 #endif /* _BINARY_TREES_H_ */

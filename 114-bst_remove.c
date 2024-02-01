@@ -17,7 +17,7 @@ bst_t *bst_remove(bst_t *root, int value)
 
 	if (!root)
 		return (NULL);
-	node = bst_search(root, value);
+	node = _bst_search(root, value);
 	if (!node)
 		return (get_root(root));
 	if (node->left && node->right)
@@ -100,14 +100,14 @@ bst_t *min_node(bst_t *tree)
  * Return: pointer to node containing searched value, or NULL
  * if tree is NULL or value not found
  */
-bst_t *bst_search(const bst_t *tree, int value)
+bst_t *_bst_search(const bst_t *tree, int value)
 {
 	if (!tree)
 		return (NULL);
 	if (tree->n == value)
 		return ((binary_tree_t *)tree);
 	return (tree->n > value ?
-			bst_search(tree->left, value) : bst_search(tree->right, value));
+			_bst_search(tree->left, value) : _bst_search(tree->right, value));
 }
 /**
  * get_root - retrieves the root of a BT
