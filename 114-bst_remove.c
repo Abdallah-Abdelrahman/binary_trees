@@ -22,7 +22,7 @@ bst_t *bst_remove(bst_t *root, int value)
 		return (NULL);
 	node = bst_search(root, value);
 	if (!node)
-		return (successor);
+		return (root);
 
 	if (node->left && node->right)
 	{
