@@ -1,5 +1,8 @@
 #include "binary_trees.h"
 
+binary_tree_t *_binary_tree_insert_right(bst_t *parent, int value);
+binary_tree_t *_binary_tree_insert_left(bst_t *parent, int value);
+bst_t *_bst_insert(bst_t *tree, int value);
 /**
  * bst_insert - inserts a value in a Binary Search Tree
  * Description:
@@ -32,15 +35,16 @@ bst_t *_bst_insert(bst_t *tree, int value)
 	if (tree->n == value)
 		return (NULL);
 	if (tree->n < value && !tree->right)
-		return (binary_tree_insert_right(tree, value));
+		return (_binary_tree_insert_right(tree, value));
 	if (tree->n > value && !tree->left)
-		return (binary_tree_insert_left(tree, value));
+		return (_binary_tree_insert_left(tree, value));
 	return (tree->n > value ?
 			_bst_insert(tree->left, value) : _bst_insert(tree->right, value));
 }
 
 /**
- * binary_tree_insert_right - inserts a node as the right-child of another node
+ * _binary_tree_insert_right - inserts a node as the right-child,
+ * of another node
  * Description: If parent already has a right-child,
  * the new node must take its place,
  * and the old right-child must be set as the right-child of the new node.
@@ -49,7 +53,7 @@ bst_t *_bst_insert(bst_t *tree, int value)
  *
  * Return: pointer to the created node, or NULL on failure or if parent is NULL
  */
-binary_tree_t *binary_tree_insert_right(bst_t *parent, int value)
+binary_tree_t *_binary_tree_insert_right(bst_t *parent, int value)
 {
 	binary_tree_t *new_node;
 
@@ -71,7 +75,7 @@ binary_tree_t *binary_tree_insert_right(bst_t *parent, int value)
 }
 
 /**
- * binary_tree_insert_left - inserts a node as the left-child of another node
+ * _binary_tree_insert_left - inserts a node as the left-child of another node
  * Description: If parent already has a left-child,
  * the new node must take its place, and the old left-child
  * must be set as the left-child of the new node.
@@ -81,7 +85,7 @@ binary_tree_t *binary_tree_insert_right(bst_t *parent, int value)
  * Return:  pointer to the created node,
  * or NULL on failure or if parent is NULL
  */
-binary_tree_t *binary_tree_insert_left(bst_t *parent, int value)
+binary_tree_t *_binary_tree_insert_left(bst_t *parent, int value)
 {
 	binary_tree_t *new_node;
 
