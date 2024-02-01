@@ -31,31 +31,34 @@ bst_t *bst_remove(bst_t *root, int value)
 			else
 				node->parent->right = successor;
 		}
-		successor->parent->left = NULL;
+		if (successor != node->right)
+		{
+			successor->parent->left = NULL;
+			successor->right = node->right;
+			successor->right->parent = successor;
+		}
 		successor->parent = node->parent;
 		successor->left = node->left;
-		successor->right = node->right;
 		successor->left->parent = successor;
-		successor->right->parent = successor;
 		free(node);
 		return (get_root(successor));
 	}
 	if (!node->left && !node->right)
 	{
-		free(node);
-		if (node->parent)
-		{
+		if (node->parent && node == node->parent->left)
 			node->parent->left = NULL;
+		else if (node->parent)
 			node->parent->right = NULL;
-		}
-		return (get_root(node));
+		successor = get_root(node);
+		free(node);
+		return (successor);
 	}
 	successor = node->left ? node->left : node->right;
 	if (successor)
 		successor->parent = node->parent;
-	if (node == node->parent->left)
+	if (node->parent && node == node->parent->left)
 		node->parent->left = successor ? successor : NULL;
-	else
+	else if (node->parent)
 		node->parent->right = successor ? successor : NULL;
 	free(node);
 	return (get_root(successor));
