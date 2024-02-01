@@ -20,7 +20,6 @@ bst_t *bst_remove(bst_t *root, int value)
 	node = bst_search(root, value);
 	if (!node)
 		return (get_root(root));
-
 	if (node->left && node->right)
 	{
 		successor = inorder_successor(node);
@@ -46,7 +45,8 @@ bst_t *bst_remove(bst_t *root, int value)
 		return (successor);
 	}
 	successor = node->left ? node->left : node->right;
-	successor ? successor->parent = node->parent : NULL;
+	if (successor)
+		successor->parent = node->parent;
 	if (node->n < node->parent->n)
 		node->parent->left = successor ? successor : NULL;
 	else
