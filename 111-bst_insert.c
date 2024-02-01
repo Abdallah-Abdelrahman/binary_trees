@@ -35,9 +35,9 @@ bst_t *_bst_insert(bst_t *tree, int value)
 	if (tree->n == value)
 		return (NULL);
 	if (tree->n < value && !tree->right)
-		return (_binary_tree_insert_right(tree, value));
+		return (tree->right = binary_tree_node(tree, value));
 	if (tree->n > value && !tree->left)
-		return (_binary_tree_insert_left(tree, value));
+		return (tree->left = binary_tree_node(tree, value));
 	return (tree->n > value ?
 			_bst_insert(tree->left, value) : _bst_insert(tree->right, value));
 }
