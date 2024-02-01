@@ -40,10 +40,10 @@ bst_t *bst_remove(bst_t *root, int value)
 		free(node);
 		return (get_root(successor));
 	}
-	if (!node->parent)
+	if (!node->parent && !node->left && !node->right)
 	{
 		free(node);
-		return (successor);
+		return (NULL);
 	}
 	successor = node->left ? node->left : node->right;
 	if (successor)
