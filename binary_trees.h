@@ -10,12 +10,6 @@
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
 #define QUEUE_SIZE 500
 
-/*----------- ALIASES ------------*/
-typedef struct binary_tree_s binary_tree_t;
-typedef struct binary_tree_s bst_t;
-typedef struct binary_tree_s avl_t;
-typedef struct binary_tree_s heap_t;
-typedef struct Queue_s queue_t;
 
 /*----------- STRUCTS ------------*/
 /**
@@ -44,8 +38,15 @@ struct binary_tree_s
 struct Queue_s
 {
 	int front, rear;
-	binary_tree_t **queue;
+	struct binary_tree_s **queue;
 };
+
+/*----------- ALIASES ------------*/
+typedef struct binary_tree_s binary_tree_t;
+typedef struct binary_tree_s bst_t;
+typedef struct binary_tree_s avl_t;
+typedef struct binary_tree_s heap_t;
+typedef struct Queue_s queue_t;
 
 /*----------- PROTOTYPES ------------*/
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
