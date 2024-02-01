@@ -80,7 +80,7 @@ bst_t *inorder_successor(binary_tree_t *node)
 }
 
 /**
- * min - search minimum value on right subtree
+ * min_node - search minimum value on right subtree
  * @tree: pointer to a subtree
  *
  * Return: node comprises minimum value
@@ -93,7 +93,7 @@ bst_t *min_node(bst_t *tree)
 }
 
 /**
- * bst_search - searches for a value in a Binary Search Tree
+ * _bst_search - searches for a value in a Binary Search Tree
  * @tree: pointer to the root node of the BST to search
  * @value: value to search in the tree
  *
