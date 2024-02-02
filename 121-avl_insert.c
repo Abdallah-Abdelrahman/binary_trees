@@ -20,7 +20,7 @@ avl_t *avl_insert(avl_t **tree, int value)
 		/* root */
 		return (*tree = binary_tree_node(NULL, value));
 
-	insert(*tree, *tree, &node, value);
+	*tree = insert(*tree, *tree, &node, value);
 	return (node);
 }
 /**
