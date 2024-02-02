@@ -38,6 +38,8 @@ avl_t *insert(avl_t *tree, avl_t *p, avl_t **node, int value)
 
 	if (!tree)
 		return (*node = binary_tree_node(p, value));
+	if (tree->n == value)
+		return (NULL);
 	else if (value < tree->n)
 		tree->left = insert(tree->left, tree, node, value);
 	else if (value > tree->n)

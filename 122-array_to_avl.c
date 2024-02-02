@@ -1,4 +1,5 @@
 #include "binary_trees.h"
+bst_t *get_root(bst_t *node);
 
 /**
  * array_to_avl - builds an AVL tree from an array
@@ -21,5 +22,19 @@ avl_t *array_to_avl(int *array, size_t size)
 	for (i = 0; i < size; i++)
 		avl_insert(&tree, array[i]);
 
-	return (tree);
+	return (get_root(tree));
+}
+/**
+ * get_root - retrieves the root of a BT
+ * @node: pointer to a node
+ *
+ * Return: root or NULL, if tree is empty
+ */
+bst_t *get_root(bst_t *node)
+{
+	if (!node)
+		return (NULL);
+	while (node->parent)
+		node = node->parent;
+	return (node);
 }
