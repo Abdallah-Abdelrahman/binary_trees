@@ -30,7 +30,7 @@ avl_t *avl_insert(avl_t **tree, int value)
  * @node: reference to the new node inserted
  * @value: value of node to insert
  *
- * Return: the new tree
+ * Return: the tree root
  */
 avl_t *insert(avl_t *tree, avl_t *p, avl_t **node, int value)
 {
