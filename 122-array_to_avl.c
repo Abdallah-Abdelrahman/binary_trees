@@ -22,7 +22,7 @@ avl_t *array_to_avl(int *array, size_t size)
 	for (i = 0; i < size; i++)
 		avl_insert(&tree, array[i]);
 
-	return (get_root(tree));
+	return ((tree));
 }
 /**
  * get_root - retrieves the root of a BT
