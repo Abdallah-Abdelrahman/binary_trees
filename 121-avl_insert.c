@@ -1,5 +1,5 @@
 #include "binary_trees.h"
-avl_t *insert(avl_t *tree, avl_t *p, int value);
+avl_t *insert(avl_t *tree, avl_t *p, avl_t **node, int value);
 
 /**
  * avl_insert - inserts a value in an AVL Tree
@@ -14,33 +14,34 @@ avl_t *insert(avl_t *tree, avl_t *p, int value);
  */
 avl_t *avl_insert(avl_t **tree, int value)
 {
-	avl_t *node;
+	avl_t *node = NULL;
 
 	if (!*tree)
 		/* root */
 		return (*tree = binary_tree_node(NULL, value));
 
-	node = insert(*tree, *tree, value);
+	insert(*tree, *tree, &node, value);
 	return (node);
 }
 /**
  * insert - helper function to insert in avl
  * @tree: root
  * @p: parent node
+ * @node: reference to the new node inserted
  * @value: value of node to insert
  *
  * Return: the new tree
  */
-avl_t *insert(avl_t *tree, avl_t *p, int value)
+avl_t *insert(avl_t *tree, avl_t *p, avl_t **node, int value)
 {
 	int bf;
 
 	if (!tree)
-		return (binary_tree_node(p, value));
+		return (*node = binary_tree_node(p, value));
 	else if (value < tree->n)
-		tree->left = insert(tree->left, tree, value);
+		tree->left = insert(tree->left, tree, node, value);
 	else if (value > tree->n)
-		tree->right = insert(tree->right, tree, value);
+		tree->right = insert(tree->right, tree, node, value);
 
 	bf = binary_tree_balance(tree);
 	if (bf > 1 && value < tree->left->n)
@@ -52,11 +53,13 @@ avl_t *insert(avl_t *tree, avl_t *p, int value)
 
 	if (bf > 1 && value > tree->left->n)
 	{
+		/* perform LR rotation */
 		tree->left = binary_tree_rotate_left(tree->left);
 		return (binary_tree_rotate_right(tree));
 	}
 	if (bf < -1 && value < tree->right->n)
 	{
+		/* perform RL rotation */
 		tree->right = binary_tree_rotate_right(tree->right);
 		return (binary_tree_rotate_left(tree));
 	}
