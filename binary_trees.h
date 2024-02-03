@@ -97,6 +97,6 @@ size_t _pow(int base, int exp);
 bst_t *get_root(bst_t *node);
 bst_t *inorder_successor(binary_tree_t *node);
 bst_t *min_node(bst_t *tree);
-void repair_balance(avl_t **tree);
+void repair_balance(avl_t *tree);
 
 #endif /* _BINARY_TREES_H_ */
