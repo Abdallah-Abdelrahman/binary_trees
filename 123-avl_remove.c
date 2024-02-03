@@ -3,6 +3,7 @@ avl_t *remove_avl(avl_t *tree, int value);
 bst_t *get_root(bst_t *node);
 void repair_balance(avl_t **tree);
 bst_t *_min(bst_t *tree);
+bst_t *_inorder_successor(binary_tree_t *node);
 
 /**
  * avl_remove - removes a node from an AVL tree
@@ -61,7 +62,7 @@ avl_t *remove_avl(avl_t *tree, int value)
 
 	if (node->left && node->right)
 	{
-		successor = inorder_successor(node);
+		successor = _inorder_successor(node);
 		p = successor->parent;
 		if (node->parent)
 		{
@@ -112,14 +113,14 @@ avl_t *remove_avl(avl_t *tree, int value)
 }
 
 /**
- * inorder_successor - get the smallest node on the right tree
+ * _inorder_successor - get the smallest node on the right tree
  * Description:
  * - if there's no right tree, get the node which is left child of its parent.
  * @node: node to get its in-order successor
  *
  * Return: successor or NULL
  */
-bst_t *inorder_successor(binary_tree_t *node)
+bst_t *_inorder_successor(binary_tree_t *node)
 {
 	bst_t *p;
 
