@@ -33,8 +33,8 @@ avl_t *avl_remove(avl_t *root, int value)
 /**
  * remove_avl - helper function to find the note and remove
  * Desctiption: it also maintains the balance factor
- * @tree:
- * @value:
+ * @tree: pointer to root
+ * @value: value of the node to remove
  *
  * Return: new root
  */
@@ -66,48 +66,52 @@ avl_t *remove_avl(avl_t *tree, int value)
 	{
 		successor = inorder_successor(node);
 		p = successor->parent;
-		node->n = successor->n;
-		if (successor->left || successor->right)
-			return (remove_avl(successor,  successor->n));
-		if (p->left == successor)
-			p->left = NULL;
-		else
-			p->right = NULL;
-		free(successor);
-
-		successor = NULL;
+		if (node->parent)
+		{
+			if (node->parent->left == node)
+				node->parent->left = successor;
+			else
+				node->parent->right = successor;
+		}
+		if (successor != node->right)
+		{
+			successor->parent->left = NULL;
+			successor->right = node->right;
+			successor->right->parent = successor;
+		}
+		node->left->parent = successor;
+		node->right->parent = successor;
+		successor->parent = node->parent;
+		successor->left = node->left;
+		successor->left->parent = successor;
 		repair_balance(&p);
-		return (node);
+		free(node);
+		return (get_root(successor));
 	}
 	if (!node->left && !node->right)
 	{
-		/* no children */
 		if (node->parent && node == node->parent->left)
 			node->parent->left = NULL;
 		else if (node->parent)
 			node->parent->right = NULL;
-
 		p = node->parent;
-		free(node);
-		node = NULL;
 		repair_balance(&p);
-		/* 		return (successor); */
-		return (node);
+		successor = get_root(node);
+		free(node);
+		return (successor);
 	}
 	/* node w/ one child, successor is leaf */
 	successor = node->left ? node->left : node->right;
-	node->n = successor->n;
+	successor->parent = node->parent;
 	p = successor->parent;
-	if (node->left == successor)
-		node->left = NULL;
-	else
-		node->right = NULL;
-
-	free(successor);
+	if (node->parent && node == node->parent->left)
+		node->parent->left = successor;
+	else if (node->parent)
+		node->parent->right = successor;
 
 	repair_balance(&p);
-	successor = NULL;
-	return (node);
+	free(node);
+	return (get_root(successor));
 }
 
 /**
@@ -148,45 +152,38 @@ bst_t *min_node(bst_t *tree)
 }
 
 /**
- * examine_balance - helper to rebalance
- * @tree:
+ * repair_balance - helper to rebalance
+ * @p: double pointer to the node
  *
+ * Return: Nothing
  */
 void repair_balance(avl_t **p)
 {
 	int bf = 0;
-/**
- * 	avl_t *tree = *p;
- * 	(void)tree;
- */
+	avl_t *tree = *p;
 
-	if (!p || !*p)
+	if (!tree)
 		return;
 	bf = binary_tree_balance((const binary_tree_t *)*p);
 
 	if (bf > 1)
 	{
 		/* perform LL rotation */
-		printf("LL = %d\n", (*p)->n);
-		if (*p == (*p)->parent->left)
-			(*p)->parent->left = (binary_tree_rotate_right((binary_tree_t *)*p));
+		if (tree == tree->parent->left)
+			tree->parent->left = (binary_tree_rotate_right((binary_tree_t *)*p));
 		else
-			(*p)->parent->right = (binary_tree_rotate_right((binary_tree_t *)*p));
+			tree->parent->right = (binary_tree_rotate_right((binary_tree_t *)*p));
 
-		printf("LL = %d\n", (*p)->n);
 	}
 	if (bf < -1)
 	{
-		printf("RR = %d\n", (*p)->n);
 		/* perform RR rotation */
-		if (*p == (*p)->parent->right)
-			(*p)->parent->right = (binary_tree_rotate_left((binary_tree_t *)*p));
+		if (tree == tree->parent->left)
+			tree->parent->left = (binary_tree_rotate_left((binary_tree_t *)*p));
 		else
-			(*p)->parent->left = (binary_tree_rotate_left((binary_tree_t *)*p));
+			tree->parent->right = (binary_tree_rotate_left((binary_tree_t *)*p));
 
-		printf("p = %d, pr = %d\n", (*p)->parent->n, (*p)->parent->right->n);
 	}
 
-	if ((*p)->parent)
-		repair_balance(&(*p)->parent);
+	repair_balance(&(*p)->parent);
 }
