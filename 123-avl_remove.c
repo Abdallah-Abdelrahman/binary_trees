@@ -1,6 +1,6 @@
 #include "binary_trees.h"
 avl_t *remove_avl(avl_t *tree, int value);
-bst_t *get_root(bst_t *node);
+bst_t *_root(bst_t *node);
 bst_t *_min(bst_t *tree);
 bst_t *_inorder_successor(binary_tree_t *node);
 
@@ -81,7 +81,7 @@ avl_t *remove_avl(avl_t *tree, int value)
 		successor->left->parent = successor;
 		repair_balance(&p);
 		free(node);
-		return (get_root(successor));
+		return (_root(successor));
 	}
 	if (!node->left && !node->right)
 	{
@@ -91,7 +91,7 @@ avl_t *remove_avl(avl_t *tree, int value)
 			node->parent->right = NULL;
 		p = node->parent;
 		repair_balance(&p);
-		successor = get_root(node);
+		successor = _root(node);
 		free(node);
 		return (successor);
 	}
@@ -106,7 +106,7 @@ avl_t *remove_avl(avl_t *tree, int value)
 
 	repair_balance(&p);
 	free(node);
-	return (get_root(successor));
+	return (_root(successor));
 }
 
 /**
@@ -181,4 +181,18 @@ void repair_balance(avl_t **p)
 	}
 
 	repair_balance(&(*p)->parent);
+}
+/**
+ * _root - retrieves the root of a BT
+ * @node: pointer to a node
+ *
+ * Return: root or NULL, if tree is empty
+ */
+bst_t *_root(bst_t *node)
+{
+	if (!node)
+		return (NULL);
+	while (node->parent)
+		node = node->parent;
+	return (node);
 }
