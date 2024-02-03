@@ -40,10 +40,10 @@ avl_t *avl_remove(avl_t *root, int value)
  */
 avl_t *remove_avl(avl_t *tree, int value)
 {
-	avl_t *node = NULL, *successor = NULL, *p;
+	avl_t *node = NULL, *successor = NULL, *p = NULL;
 
 	if (!tree)
-		return (NULL);
+		return (tree);
 	if (tree->n > value)
 		node = remove_avl(tree->left,  value);
 	else if (tree->n < value)
