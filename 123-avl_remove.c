@@ -1,8 +1,8 @@
 #include "binary_trees.h"
-avl_t *search(const bst_t *tree, int value);
 avl_t *remove_avl(avl_t *tree, int value);
 bst_t *get_root(bst_t *node);
 void repair_balance(avl_t **tree);
+bst_t *_min(bst_t *tree);
 
 /**
  * avl_remove - removes a node from an AVL tree
@@ -41,9 +41,6 @@ avl_t *avl_remove(avl_t *root, int value)
 avl_t *remove_avl(avl_t *tree, int value)
 {
 	avl_t *node = NULL, *successor = NULL, *p;
-	int bf;
-	(void)bf;
-	(void)p;
 
 	if (!tree)
 		return (NULL);
@@ -127,7 +124,7 @@ bst_t *inorder_successor(binary_tree_t *node)
 	bst_t *p;
 
 	if (node->right)
-		return (min_node(node->right));
+		return (_min(node->right));
 
 	p = node->parent;
 	while (p && node == p->right)
@@ -139,15 +136,15 @@ bst_t *inorder_successor(binary_tree_t *node)
 }
 
 /**
- * min_node - search minimum value on right subtree
+ * _min - search minimum value on right subtree
  * @tree: pointer to a subtree
  *
  * Return: node comprises minimum value
  */
-bst_t *min_node(bst_t *tree)
+bst_t *_min(bst_t *tree)
 {
 	if (tree && tree->left)
-		return (min_node(tree->left));
+		return (_min(tree->left));
 	return (tree);
 }
 
