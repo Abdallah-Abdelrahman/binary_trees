@@ -53,7 +53,7 @@ avl_t *remove_avl(avl_t *tree, int value)
 
 	if (!node)
 		/* node not found */
-		return (NULL);
+		return (_root(tree));
 
 	if (node->n != value)
 		/* if it's not the searched node do nothing */
