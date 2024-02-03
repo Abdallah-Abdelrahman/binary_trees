@@ -40,6 +40,7 @@ avl_t *avl_remove(avl_t *root, int value)
 avl_t *remove_avl(avl_t *tree, int value)
 {
 	avl_t *node = NULL, *successor = NULL, *p = NULL;
+	(void)p;
 
 	if (!tree)
 		return (tree);
@@ -61,7 +62,7 @@ avl_t *remove_avl(avl_t *tree, int value)
 	if (node->left && node->right)
 	{
 		successor = _inorder_successor(node);
-		p = successor->parent;
+/*		p = successor->parent; */
 		if (node->parent)
 		{
 			if (node->parent->left == node)
@@ -78,7 +79,7 @@ avl_t *remove_avl(avl_t *tree, int value)
 		successor->parent = node->parent;
 		successor->left = node->left;
 		successor->left->parent = successor;
-		repair_balance(&p);
+		repair_balance(&successor);
 		free(node);
 		return (_root(successor));
 	}
@@ -88,8 +89,8 @@ avl_t *remove_avl(avl_t *tree, int value)
 			node->parent->left = NULL;
 		else if (node->parent)
 			node->parent->right = NULL;
-		p = node->parent;
-		repair_balance(&p);
+/*		p = node->parent; */
+		repair_balance(&node);
 		successor = _root(node);
 		free(node);
 		return (successor);
@@ -97,13 +98,13 @@ avl_t *remove_avl(avl_t *tree, int value)
 	/* node w/ one child, successor is leaf */
 	successor = node->left ? node->left : node->right;
 	successor->parent = node->parent;
-	p = successor->parent;
+/*	p = successor->parent; */
 	if (node->parent && node == node->parent->left)
 		node->parent->left = successor;
 	else if (node->parent)
 		node->parent->right = successor;
 
-	repair_balance(&p);
+	repair_balance(&successor);
 	free(node);
 	return (_root(successor));
 }
