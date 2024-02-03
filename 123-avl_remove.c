@@ -185,18 +185,18 @@ void repair_balance(avl_t **p)
 		/* perform LR rotation */
 		tree->left = binary_tree_rotate_left(tree->left);
 		if (tree == tree->parent->left)
-			tree->parent->left = (binary_tree_rotate_right(*p));
+			tree->parent = (binary_tree_rotate_right(*p));
 		else
-			tree->parent->right = (binary_tree_rotate_right(*p));
+			tree->parent = (binary_tree_rotate_right(*p));
 	}
 	if (bf < -1 && binary_tree_balance(tree->right) > 0)
 	{
 		/* perform RL rotation */
 		tree->right = binary_tree_rotate_right(tree->right);
 		if (tree == tree->parent->left)
-			tree->parent->left = (binary_tree_rotate_left(*p));
+			tree->parent = (binary_tree_rotate_left(*p));
 		else
-			tree->parent->right = (binary_tree_rotate_left(*p));
+			tree->parent = (binary_tree_rotate_left(*p));
 	}
 
 	repair_balance(&(*p)->parent);
