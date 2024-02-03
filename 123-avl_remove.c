@@ -1,7 +1,6 @@
 #include "binary_trees.h"
 avl_t *remove_avl(avl_t *tree, int value);
 bst_t *get_root(bst_t *node);
-void repair_balance(avl_t **tree);
 bst_t *_min(bst_t *tree);
 bst_t *_inorder_successor(binary_tree_t *node);
 
@@ -77,8 +76,6 @@ avl_t *remove_avl(avl_t *tree, int value)
 			successor->right = node->right;
 			successor->right->parent = successor;
 		}
-		node->left->parent = successor;
-		node->right->parent = successor;
 		successor->parent = node->parent;
 		successor->left = node->left;
 		successor->left->parent = successor;
@@ -162,24 +159,24 @@ void repair_balance(avl_t **p)
 
 	if (!tree)
 		return;
-	bf = binary_tree_balance((const binary_tree_t *)*p);
+	bf = binary_tree_balance(*p);
 
 	if (bf > 1)
 	{
 		/* perform LL rotation */
 		if (tree == tree->parent->left)
-			tree->parent->left = (binary_tree_rotate_right((binary_tree_t *)*p));
+			tree->parent->left = (binary_tree_rotate_right(*p));
 		else
-			tree->parent->right = (binary_tree_rotate_right((binary_tree_t *)*p));
+			tree->parent->right = (binary_tree_rotate_right(*p));
 
 	}
 	if (bf < -1)
 	{
 		/* perform RR rotation */
 		if (tree == tree->parent->left)
-			tree->parent->left = (binary_tree_rotate_left((binary_tree_t *)*p));
+			tree->parent->left = (binary_tree_rotate_left(*p));
 		else
-			tree->parent->right = (binary_tree_rotate_left((binary_tree_t *)*p));
+			tree->parent->right = (binary_tree_rotate_left(*p));
 
 	}
 
