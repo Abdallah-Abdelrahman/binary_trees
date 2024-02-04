@@ -1,6 +1,4 @@
 #include "binary_trees.h"
-avl_t *insert(avl_t *tree, avl_t *p, avl_t **node, int value);
-avl_t *build_avl(avl_t **tree, avl_t *p, int *array, int first, int last);
 
 /**
  * sorted_array_to_avl - builds an AVL tree from an array
