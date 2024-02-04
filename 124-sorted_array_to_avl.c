@@ -14,8 +14,11 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 	int first, last;
 	avl_t *root = NULL;
 
-	if (!array || size == 0)
+	if (!array || size <= 0)
 		return (NULL);
+
+	if (size == 1)
+		return (binary_tree_node(NULL, array[0]));
 
 	first = 0, last = size - 1;
 	root = NULL;

@@ -98,5 +98,6 @@ bst_t *get_root(bst_t *node);
 bst_t *inorder_successor(binary_tree_t *node);
 bst_t *min_node(bst_t *tree);
 void repair_balance(avl_t *tree);
+avl_t *build_avl(avl_t **tree, avl_t *p, int *array, int first, int last);
 
 #endif /* _BINARY_TREES_H_ */
