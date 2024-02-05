@@ -1,10 +1,4 @@
 #include "binary_trees.h"
-#define SWAP(x, y)\
-{\
-	x->n ^= y->n;\
-	y->n ^= x->n;\
-	x->n ^= y->n;\
-}
 
 void heapify(heap_t *node);
 heap_t *insert_heap(heap_t *root, int value);
