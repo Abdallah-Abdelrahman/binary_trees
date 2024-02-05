@@ -1,5 +1,6 @@
 #include "binary_trees.h"
 heap_t *insert(heap_t *root, int value);
+void heapify(heap_t *node);
 
 /**
  * heap_insert - inserts a value in Max Binary Heap
@@ -66,8 +67,12 @@ void heapify(heap_t *node)
 	if (!node || !node->parent)
 		return;
 	if (node->n > node->parent->n)
+	{
 		/* swap */
-		SWAP(node, node->parent);
+		node->n ^= node->parent->n;
+		node->parent->n ^= node->n;
+		node->n ^= node->parent->n;
+	}
 
 	heapify(node->parent);
 }
