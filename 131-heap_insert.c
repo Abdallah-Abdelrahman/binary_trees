@@ -3,23 +3,24 @@
 /**
  * _heapify - helper function to maintain the heap property
  * @node: double pointer to inserted node
+ * @new: node after heapifying
  *
  * Return: Nothing
  */
-void _heapify(heap_t *node)
+void _heapify(heap_t *node, heap_t **new)
 {
 
 	if (!node || !node->parent)
 		return;
+
 	if (node->n > node->parent->n)
 	{
 		/* swap */
-		node->n ^= node->parent->n;
-		node->parent->n ^= node->n;
-		node->n ^= node->parent->n;
+		SWAP(node, node->parent);
+		*new = node->parent;
 	}
 
-	_heapify(node->parent);
+	_heapify(node->parent, new);
 }
 
 /**
@@ -41,7 +42,7 @@ heap_t *insert(heap_t *root, int value)
 		if (!tmp->left)
 		{
 			node = tmp->left = binary_tree_node(tmp, value);
-			_heapify(tmp->left);
+			_heapify(tmp->left, &node);
 			free(q.queue);
 			return (node);
 		}
@@ -51,7 +52,7 @@ heap_t *insert(heap_t *root, int value)
 		{
 			node = tmp->right = binary_tree_node(tmp, value);
 			tmp->right = node;
-			_heapify(node);
+			_heapify(node, &node);
 			free(q.queue);
 			return (node);
 		}
