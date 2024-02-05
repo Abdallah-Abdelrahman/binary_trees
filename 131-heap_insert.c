@@ -1,4 +1,5 @@
 #include "binary_trees.h"
+heap_t *insert(heap_t *root, int value);
 
 /**
  * heap_insert - inserts a value in Max Binary Heap
@@ -12,17 +13,17 @@ heap_t *heap_insert(heap_t **root, int value)
 	if (!*root)
 		return (*root = binary_tree_node(NULL, value));
 
-	return (insert_heap(*root, value));
+	return (insert(*root, value));
 }
 
 /**
- * insert_heap - helper function to inser int MAX HEAP
+ * insert - helper function to inser int MAX HEAP
  * @root: pointer to the root node
  * @value:
  *
  * Return: newly node created
  */
-heap_t *insert_heap(heap_t *root, int value)
+heap_t *insert(heap_t *root, int value)
 {
 	heap_t *tmp = root, *node = NULL;
 	queue_t q = {0, 0, calloc(sizeof(heap_t), QUEUE_SIZE)};
