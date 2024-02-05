@@ -40,10 +40,10 @@ heap_t *insert(heap_t *root, int value)
 	{
 		if (!tmp->left)
 		{
-			tmp->left = binary_tree_node(tmp, value);
+			node = tmp->left = binary_tree_node(tmp, value);
 			_heapify(tmp->left);
 			free(q.queue);
-			return (binary_tree_node(NULL, value));
+			return (node);
 		}
 		q.queue[q.rear++] = tmp->left;
 
@@ -53,7 +53,7 @@ heap_t *insert(heap_t *root, int value)
 			tmp->right = node;
 			_heapify(node);
 			free(q.queue);
-			return (binary_tree_node(NULL, value));
+			return (node);
 		}
 		q.queue[q.rear++] = tmp->right;
 		tmp = q.queue[q.front++];
