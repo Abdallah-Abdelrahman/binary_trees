@@ -1,7 +1,5 @@
 #include "binary_trees.h"
 
-void heapify(heap_t *node);
-heap_t *insert_heap(heap_t *root, int value);
 /**
  * heap_insert - inserts a value in Max Binary Heap
  * @root: double pointer to the root node of the Heap to insert the value
@@ -26,7 +24,7 @@ heap_t *heap_insert(heap_t **root, int value)
  */
 heap_t *insert_heap(heap_t *root, int value)
 {
-	heap_t *tmp = root;
+	heap_t *tmp = root, *node = NULL;
 	queue_t q = {0, 0, calloc(sizeof(heap_t), QUEUE_SIZE)};
 
 	while (tmp)
@@ -35,19 +33,23 @@ heap_t *insert_heap(heap_t *root, int value)
 		{
 			tmp->left = binary_tree_node(tmp, value);
 			heapify(tmp->left);
-			return (tmp->left);
+			free(q.queue);
+			return (binary_tree_node(NULL, value));
 		}
 		q.queue[q.rear++] = tmp->left;
 
 		if (!tmp->right)
 		{
-			tmp->right = binary_tree_node(tmp, value);
-			heapify(tmp->right);
-			return (tmp->right);
+			node = tmp->right = binary_tree_node(tmp, value);
+			tmp->right = node;
+			heapify(node);
+			free(q.queue);
+			return (binary_tree_node(NULL, value));
 		}
 		q.queue[q.rear++] = tmp->right;
 		tmp = q.queue[q.front++];
 	}
+	free(q.queue);
 	return (NULL);
 }
 
