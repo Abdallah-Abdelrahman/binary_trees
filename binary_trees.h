@@ -10,6 +10,12 @@
 /*----------- MACROS ------------*/
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
 #define QUEUE_SIZE 500
+#define SWAP(x, y)\
+{\
+	x->n ^= y->n;\
+	y->n ^= x->n;\
+	x->n ^= y->n;\
+}
 
 
 /*----------- STRUCTS ------------*/
@@ -99,5 +105,7 @@ bst_t *inorder_successor(binary_tree_t *node);
 bst_t *min_node(bst_t *tree);
 void repair_balance(avl_t *tree);
 avl_t *build_avl(avl_t **tree, avl_t *p, int *array, int first, int last);
+void heapify(heap_t *node);
+heap_t *insert_heap(heap_t *root, int value);
 
 #endif /* _BINARY_TREES_H_ */
