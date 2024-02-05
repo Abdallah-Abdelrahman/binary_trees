@@ -1,6 +1,6 @@
 #include "binary_trees.h"
 heap_t *insert(heap_t *root, int value);
-void heapify(heap_t *node);
+void _heapify(heap_t *node);
 
 /**
  * heap_insert - inserts a value in Max Binary Heap
@@ -34,7 +34,7 @@ heap_t *insert(heap_t *root, int value)
 		if (!tmp->left)
 		{
 			tmp->left = binary_tree_node(tmp, value);
-			heapify(tmp->left);
+			_heapify(tmp->left);
 			free(q.queue);
 			return (binary_tree_node(NULL, value));
 		}
@@ -44,7 +44,7 @@ heap_t *insert(heap_t *root, int value)
 		{
 			node = tmp->right = binary_tree_node(tmp, value);
 			tmp->right = node;
-			heapify(node);
+			_heapify(node);
 			free(q.queue);
 			return (binary_tree_node(NULL, value));
 		}
@@ -56,12 +56,12 @@ heap_t *insert(heap_t *root, int value)
 }
 
 /**
- * heapify - helper function to maintain the heap property
+ * _heapify - helper function to maintain the heap property
  * @node: double pointer to inserted node
  *
  * Return: Nothing
  */
-void heapify(heap_t *node)
+void _heapify(heap_t *node)
 {
 
 	if (!node || !node->parent)
@@ -74,5 +74,5 @@ void heapify(heap_t *node)
 		node->n ^= node->parent->n;
 	}
 
-	heapify(node->parent);
+	_heapify(node->parent);
 }
