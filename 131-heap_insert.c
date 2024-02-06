@@ -33,7 +33,7 @@ void _heapify(heap_t *node, heap_t **new)
 heap_t *insert(heap_t *root, int value)
 {
 	heap_t *tmp = root, *node = NULL;
-	queue_t q = QUEUE(QUEUE_SIZE);
+	queue_t q = QUEUE(q, QUEUE_SIZE);
 
 	while (tmp)
 	{

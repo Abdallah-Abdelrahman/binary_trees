@@ -16,8 +16,10 @@
 	y->n ^= x->n;\
 	x->n ^= y->n;\
 }
-#define QUEUE(size)\
-	{.front = 0, .rear = 0, .queue = calloc(sizeof(heap_t), (size))}
+#define QUEUE(ptr, size)\
+	{.front = 0, .rear = 0, .queue = NULL};\
+	ptr.queue = calloc(sizeof(binary_tree_t), size)
+
 
 
 /*----------- STRUCTS ------------*/
