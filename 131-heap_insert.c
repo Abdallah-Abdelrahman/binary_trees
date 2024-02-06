@@ -33,9 +33,7 @@ void _heapify(heap_t *node, heap_t **new)
 heap_t *insert(heap_t *root, int value)
 {
 	heap_t *tmp = root, *node = NULL;
-	queue_t q = {0, 0, NULL};
-
-	q.queue = calloc(sizeof(heap_t), QUEUE_SIZE);
+	queue_t q = QUEUE(QUEUE_SIZE);
 
 	while (tmp)
 	{
