@@ -17,7 +17,7 @@
 	x->n ^= y->n;\
 }
 #define QUEUE(ptr, size)\
-	{.front = 0, .rear = 0, .queue = NULL};\
+	{0, 0, NULL};\
 	ptr.queue = calloc(sizeof(binary_tree_t), size)
 
 
