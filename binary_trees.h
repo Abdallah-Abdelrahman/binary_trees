@@ -16,10 +16,10 @@
 	y->n ^= x->n;\
 	x->n ^= y->n;\
 }
+/* Initialize a queue */
 #define QUEUE(ptr, size)\
 	{0, 0, NULL};\
 	ptr.queue = calloc(sizeof(binary_tree_t), size)
-
 
 
 /*----------- STRUCTS ------------*/
