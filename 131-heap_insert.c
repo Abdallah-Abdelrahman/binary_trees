@@ -1,13 +1,13 @@
 #include "binary_trees.h"
 
 /**
- * _heapify - helper function to maintain the heap property
+ * heapify_up - helper function to maintain the heap property
  * @node: double pointer to inserted node
  * @new: node after heapifying
  *
  * Return: Nothing
  */
-void _heapify(heap_t *node, heap_t **new)
+void heapify_up(heap_t *node, heap_t **new)
 {
 
 	if (!node || !node->parent)
@@ -20,7 +20,7 @@ void _heapify(heap_t *node, heap_t **new)
 		*new = node->parent;
 	}
 
-	_heapify(node->parent, new);
+	heapify_up(node->parent, new);
 }
 
 /**
@@ -40,7 +40,7 @@ heap_t *insert(heap_t *root, int value)
 		if (!tmp->left)
 		{
 			node = tmp->left = binary_tree_node(tmp, value);
-			_heapify(tmp->left, &node);
+			heapify_up(tmp->left, &node);
 			free(q.queue);
 			return (node);
 		}
@@ -50,7 +50,7 @@ heap_t *insert(heap_t *root, int value)
 		{
 			node = tmp->right = binary_tree_node(tmp, value);
 			tmp->right = node;
-			_heapify(node, &node);
+			heapify_up(node, &node);
 			free(q.queue);
 			return (node);
 		}
