@@ -54,6 +54,7 @@ void extract_root(heap_t *root)
 			q.queue[q.rear++] = root->right;
 	}
 
+	/* assign root value to last node in level-order traversal */
 	q.queue[0]->n = q.queue[q.rear - 1]->n;
 	if (q.queue[q.rear - 1]->parent->left == q.queue[q.rear - 1])
 		q.queue[q.rear - 1]->parent->left = NULL;
